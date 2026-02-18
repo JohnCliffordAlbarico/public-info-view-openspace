@@ -1,0 +1,57 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Build outputs
+build/
+dist/
+**/build/
+**/dist/
+
+# Backend data folder
+openspace-backend/data/**
+
+# Environment files
+.env
+.env.local
+.env.*.local
+**/.env
+**/.env.local
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Uploads
+uploads/
+**/uploads/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+**/.expo/
+
+# Coverage
+coverage/
+
+# Windows shortcuts
+*.lnk
+
+# Optional: Package lock files
+# package-lock.json
+# **/package-lock.json
