@@ -1,23 +1,16 @@
-const fs = require('fs');
+/**
+ * Initialize Database Schema
+ * Automatically creates all tables from SQL files in migrations/schema/
+ * 
+ * Usage: node init-schema.js
+ */
+
+const Database = require('better-sqlite3'); // note: no .verbose()
 const path = require('path');
-const Database = require('better-sqlite3');
 const { createAllTables, verifyTables } = require('./src/utils/schemamanager');
 
-const dbDir = path.join(__dirname, 'data');
-const dbPath = path.join(dbDir, 'pi.db');
+const dbPath = path.join(__dirname, 'data', 'pi.db');
 const schemaDir = path.join(__dirname, 'migrations', 'schema');
-
-// Ensure database directory exists
-if (!fs.existsSync(dbDir)) {
-  fs.mkdirSync(dbDir, { recursive: true });
-  console.log(`📂 Created database directory: ${dbDir}`);
-}
-
-// Ensure migrations/schema directory exists
-if (!fs.existsSync(schemaDir)) {
-  fs.mkdirSync(schemaDir, { recursive: true });
-  console.log(`📂 Created migrations/schema directory: ${schemaDir}`);
-}
 
 console.log('🚀 Database Schema Initializer\n');
 console.log('Database:', dbPath);
@@ -27,14 +20,14 @@ console.log('='.repeat(50) + '\n');
 let db;
 
 try {
-  // Open database
+  // Open database (synchronous)
   db = new Database(dbPath);
   console.log('✅ Connected to database.\n');
 
-  // Create all tables from SQL files
+  // Create all tables from schema files (synchronous)
   const results = createAllTables(db, schemaDir);
 
-  // Verify tables
+  // Verify tables were created (synchronous)
   verifyTables(db);
 
   console.log('✅ Database schema initialization complete!\n');
